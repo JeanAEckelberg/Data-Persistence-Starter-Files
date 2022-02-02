@@ -70,6 +70,13 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        if(m_Points > MainUIManager.Instance.currentHighScore)
+        {
+            MainUIManager.Instance.currentHighScore = m_Points;
+            MainUIManager.Instance.highScoreHolder = MainUIManager.Instance.playerName;
+            SendMessage("onEnd", GameObject.FindObjectOfType<Canvas>());
+            MainUIManager.Instance.saveScores();
+        }
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
